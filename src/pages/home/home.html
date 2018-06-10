@@ -1,44 +1,55 @@
+<!--
+  Generated template for the HomePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
 <ion-header>
+
   <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
+    <ion-title>Cool Bro'! Faite ton Skill</ion-title>
   </ion-navbar>
+
 </ion-header>
 
+
 <ion-content padding>
+
+  <div>
+    <!-- Heading Title -->
+    <h4 class="app-heading">Select ton SKILL, bro :</h4>
+
+    <!-- Search Skill -->
     <div>
-      <!-- Heading Title -->
-      <h4 class="app-heading">Select Available Skill Below:</h4>
-      
-      <!-- Search Field -->
-      <div>
-        <div class="filter-wrap">
-          <input [(ngModel)]="searchText" placeholder="Filter Games" class="filter-input">
-          <span class="filter-clear" *ngIf="searchText.length>0" (click)="clearFilter()">X</span>
-        </div>
+      <div class="filter-wrap">
+        <input [(ngModel)]="searchText" placeholder="hum?" class="filter-input">
+        <span class="filter-clear" *ngIf="searchText.length>0" (click)="clearFilter()">
+          <ion-icon name="close"></ion-icon>
+        </span>
       </div>
-      <!-- Clear Link -->
-      <div class="clear-selection" title="Click to Clear Selections" (click)="clearSelection()" *ngIf="selected_count">Clear Selection</div>
-      
-      <!-- Skill List -->
-      <ul class="game-list">
-        <li *ngFor="let g of games | filter : searchText" class="game-item"> 
-          <input (change)="getSelected()" type="checkbox"
-                   name="games"
-                   value="{{g.id}}"
-                   [(ngModel)]="g.selected"/> 
-          <span class="game-text">{{g.name}}</span>
-        </li>
-      </ul>
-      
-      <!-- Selected Skill-->
-      <div class="selected-games-wrap">
-          <div class="selected-game" *ngFor="let s of selected_games" >
-            <span>{{s.name}} <span class="delete-game" (click)="deleteGame(s.id)" title="Click to delete">X</span></span>
-          </div>
-      </div>
-      
     </div>
- 
+    <!-- Clear Link -->
+    <div class="clear-selection" title="Clear Selections" (click)="clearSelection()" *ngIf="selected_count">Clear</div>
+
+    <!-- Skill List -->
+    <ul class="skill-list">
+      <li *ngFor="let g of skills | filter : searchText" class="skill-item">
+        <input (change)="getSelected()" type="checkbox" name="skills" value="{{g.id}}" [(ngModel)]="g.selected" />
+        <span class="skill-text">{{g.name}}</span>
+      </li>
+    </ul>
+
+    <!-- Selected Skills-->
+    <div class="selected-skill-wrap">
+      <div class="selected-skill" *ngFor="let s of selected_skills">
+        <span>{{s.name}}
+          <span class="delete-skill" (click)="deleteSkill(s.id)" title="Click to delete">
+            <ion-icon name="close"></ion-icon>
+          </span>
+        </span>
+      </div>
+    </div>
+
+  </div>
+
 </ion-content>

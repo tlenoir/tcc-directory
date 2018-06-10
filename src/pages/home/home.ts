@@ -1,82 +1,84 @@
-import { Component, NgModule } from '@angular/core'
-import { BrowserModule } from '@angular/platform-browser';
-import { Pipe, PipeTransform } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { FilterPipe } from '../../pipes/filter/filter';
+import { Component } from '@angular/core'
 
 @Component({
   selector: 'page-home',
-  templateUrl: 'home.html'
+  templateUrl: 'home.html',
 })
 export class HomePage {
   name: string;
   searchText: string = "";
+
+  // selected_count use to '*ngIF' => "SHOW_SKILL"
   selected_count: number = 0;
-  selected_games;
+  selected_skills;
+
+  constructor() {
+    this.getSelected();
+  }
 
 
-  // Data Object to List Games
-  games = [
+  // Data Object to List Skills
+  skills = [
     {
-      name: 'Favoris',
+      name: 'PHP',
       id: 1,
       selected: true
     },
     {
-      name: 'PHP',
+      name: 'JavaScript',
       id: 2,
       selected: false
     },
     {
-      name: 'HTML',
+      name: 'Java',
       id: 3,
       selected: false
     },
     {
-      name: 'Java',
+      name: 'HTML',
       id: 4,
       selected: false
     },
     {
-      name: 'Firebase',
+      name: 'Ionic',
       id: 5,
       selected: false
     },
     {
-      name: 'Ionic',
+      name: 'React',
       id: 6,
       selected: true
     },
     {
-      name: 'React',
+      name: 'Firebase',
       id: 7,
       selected: false
     }
   ]
 
-  // Getting Selected Games and Count
+  // Getting Selected Skills and Count
   getSelected() {
-    this.selected_games = this.games.filter(s => {
+    this.selected_skills = this.skills.filter(s => {
       return s.selected;
     });
-    this.selected_count = this.selected_games.length;
-    //alert(this.selected_games);    
+    this.selected_count = this.selected_skills.length;
+    //alert(this.selected_skills);    
   }
 
   // Clearing All Selections
   clearSelection() {
     this.searchText = "";
-    this.games = this.games.filter(g => {
+    this.skills = this.skills.filter(g => {
       g.selected = false;
       return true;
     });
     this.getSelected();
   }
 
-  //Delete Single Listed Game Tag
-  deleteGame(id: number) {
+  //Delete Single Listed Skill Tag
+  deleteSkill(id: number) {
     this.searchText = "";
-    this.games = this.games.filter(g => {
+    this.skills = this.skills.filter(g => {
       if (g.id == id)
         g.selected = false;
 
@@ -85,12 +87,8 @@ export class HomePage {
     this.getSelected();
   }
 
-  //Clear term types by user
+  //Clear Render Skill by X-user
   clearFilter() {
     this.searchText = "";
-  }
-
-  constructor() {
-    this.getSelected();
   }
 }

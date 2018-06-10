@@ -1,3 +1,4 @@
+import { HomePage } from './../pages/home/home';
 import { FilterPipe } from './../pipes/filter/filter';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
@@ -6,7 +7,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
 import { DetailsPage } from '../pages/details/details';
 import { WelcomePage } from '../pages/welcome/welcome';
 
@@ -19,9 +19,10 @@ import { CallNumber } from '@ionic-native/call-number';
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
     DetailsPage,
-    WelcomePage
+    WelcomePage,
+    HomePage,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
@@ -30,9 +31,9 @@ import { CallNumber } from '@ionic-native/call-number';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
     DetailsPage,
-    WelcomePage
+    WelcomePage,
+    HomePage,
   ],
   providers: [
     StatusBar,
@@ -42,8 +43,7 @@ import { CallNumber } from '@ionic-native/call-number';
     SMS,
     InAppBrowser,
     Geolocation,
-    CallNumber,
-    FilterPipe
+    CallNumber
   ]
 })
 export class AppModule {}
