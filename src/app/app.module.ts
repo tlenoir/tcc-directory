@@ -1,3 +1,4 @@
+import { FilterPipe } from './../pipes/filter/filter';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -41,7 +42,8 @@ import { CallNumber } from '@ionic-native/call-number';
     SMS,
     InAppBrowser,
     Geolocation,
-    CallNumber
+    CallNumber,
+    FilterPipe
   ]
 })
 export class AppModule {}
