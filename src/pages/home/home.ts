@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 
 import { Platform } from "ionic-angular";
-import { Response, Http } from '@angular/http';
 import { GetSkillsProvider } from './../../providers/get-skills/get-skills';
 import { GetBusinessesProvider } from './../../providers/get-businesses/get-businesses';
 import { RootObjectSkills } from '../../providers/models/skills';
 import { RootObjectBusinesses } from '../../providers/models/businesses';
 import { Fatum } from '../../providers/models/fatum';
+
 
 
 @Component({
@@ -20,9 +20,9 @@ export class HomePage {
   // getSkills ya
   data_skills: RootObjectSkills;
   data_businesses: RootObjectBusinesses;
+  data_businesses_fatum: Fatum[];
+
   skills = [];
-  businesses: Fatum[];
-  businesses_skills: Fatum;
   
 
   // selected_count use to '*ngIF' => "SHOW_SKILL"
@@ -47,25 +47,19 @@ private gbp: GetBusinessesProvider) {
     this.gsp.getSkillsData().subscribe(data => {
       this.data_skills = data;
       this.skills = this.data_skills.data;
+
+      console.log("skills: ", this.skills);
     });
 
     this.gbp.getBusinessesData().subscribe(data => {
       this.data_businesses = data;
-      this.businesses = this.data_businesses.data;
+      this.data_businesses_fatum = this.data_businesses.data;
 
-      for (let baby = 0; baby < this.businesses.length; baby++) {
-        const element = this.businesses[baby];
-
-        console.log(element.skills);
-      
-        
-      }
-      
-
-      console.log(this.businesses);
+      console.log("businessesFatum: ", this.data_businesses_fatum);
     });
 
   }
+  
 
   
 
@@ -79,7 +73,10 @@ private gbp: GetBusinessesProvider) {
   getSelected() {
     this.selected_skills = this.skills.filter(s => {
       return s.selected;
+
+      
     });
+    console.log(this.selected_skills);
     this.selected_count = this.selected_skills.length;
     //alert(this.selected_skills);    
   }
