@@ -22,8 +22,8 @@
     <!-- Search Skill -->
     <div>
       <div class="filter-wrap">
-        <input [(ngModel)]="searchText" placeholder="hum?" class="filter-input">
-        <span class="filter-clear" *ngIf="searchText.length>0" (click)="clearFilter()">
+        <input [(ngModel)]="searchSkill" placeholder="hum?" class="filter-input">
+        <span class="filter-clear" *ngIf="searchSkill.length>0" (click)="clearFilter()">
           <ion-icon name="close"></ion-icon>
         </span>
       </div>
@@ -33,7 +33,7 @@
 
     <!-- Skill List -->
     <ul class="skill-list">
-      <li *ngFor="let g of skills | filter : searchText" class="skill-item">
+      <li *ngFor="let g of skills | filter : searchSkill" class="skill-item">
         <input (change)="getSelected()" type="checkbox" name="skills" value="{{g.id}}" [(ngModel)]="g.selected" />
         <span class="skill-text">{{g.name}}</span>
       </li>

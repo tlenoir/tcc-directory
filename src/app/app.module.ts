@@ -15,6 +15,10 @@ import { SMS } from '@ionic-native/sms';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Geolocation } from '@ionic-native/geolocation';
 import { CallNumber } from '@ionic-native/call-number';
+import { HttpClientModule } from '@angular/common/http';
+import { GetSkillsProvider } from '../providers/get-skills/get-skills';
+import { GetBusinessesProvider } from '../providers/get-businesses/get-businesses';
+
 
 @NgModule({
   declarations: [
@@ -26,7 +30,8 @@ import { CallNumber } from '@ionic-native/call-number';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -43,7 +48,9 @@ import { CallNumber } from '@ionic-native/call-number';
     SMS,
     InAppBrowser,
     Geolocation,
-    CallNumber
+    CallNumber,
+    GetSkillsProvider,
+    GetBusinessesProvider
   ]
 })
 export class AppModule {}

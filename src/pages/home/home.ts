@@ -1,4 +1,13 @@
-import { Component } from '@angular/core'
+import { Component } from '@angular/core';
+
+import { Platform } from "ionic-angular";
+import { Response, Http } from '@angular/http';
+import { GetSkillsProvider } from './../../providers/get-skills/get-skills';
+import { GetBusinessesProvider } from './../../providers/get-businesses/get-businesses';
+import { RootObjectSkills } from '../../providers/models/skills';
+import { RootObjectBusinesses } from '../../providers/models/businesses';
+import { Fatum } from '../../providers/models/fatum';
+
 
 @Component({
   selector: 'page-home',
@@ -6,55 +15,65 @@ import { Component } from '@angular/core'
 })
 export class HomePage {
   name: string;
-  searchText: string = "";
+  searchSkill: string = "";
+
+  // getSkills ya
+  data_skills: RootObjectSkills;
+  data_businesses: RootObjectBusinesses;
+  skills = [];
+  businesses: Fatum[];
+  businesses_skills: Fatum;
+  
 
   // selected_count use to '*ngIF' => "SHOW_SKILL"
   selected_count: number = 0;
   selected_skills;
 
-  constructor() {
-    this.getSelected();
+  constructor(public platform: Platform,
+  private gsp: GetSkillsProvider,
+private gbp: GetBusinessesProvider) {
+
+    platform.ready().then(() => {
+      this.getData();
+      this.getSelected();
+
+    });
+    
   }
+
+  // ================================================
+
+  getData(){
+    this.gsp.getSkillsData().subscribe(data => {
+      this.data_skills = data;
+      this.skills = this.data_skills.data;
+    });
+
+    this.gbp.getBusinessesData().subscribe(data => {
+      this.data_businesses = data;
+      this.businesses = this.data_businesses.data;
+
+      for (let baby = 0; baby < this.businesses.length; baby++) {
+        const element = this.businesses[baby];
+
+        console.log(element.skills);
+      
+        
+      }
+      
+
+      console.log(this.businesses);
+    });
+
+  }
+
+  
+
+
+  // ================================================
 
 
   // Data Object to List Skills
-  skills = [
-    {
-      name: 'PHP',
-      id: 1,
-      selected: true
-    },
-    {
-      name: 'JavaScript',
-      id: 2,
-      selected: false
-    },
-    {
-      name: 'Java',
-      id: 3,
-      selected: false
-    },
-    {
-      name: 'HTML',
-      id: 4,
-      selected: false
-    },
-    {
-      name: 'Ionic',
-      id: 5,
-      selected: false
-    },
-    {
-      name: 'React',
-      id: 6,
-      selected: true
-    },
-    {
-      name: 'Firebase',
-      id: 7,
-      selected: false
-    }
-  ]
 
   // Getting Selected Skills and Count
   getSelected() {
@@ -67,7 +86,7 @@ export class HomePage {
 
   // Clearing All Selections
   clearSelection() {
-    this.searchText = "";
+    this.searchSkill = "";
     this.skills = this.skills.filter(g => {
       g.selected = false;
       return true;
@@ -77,7 +96,7 @@ export class HomePage {
 
   //Delete Single Listed Skill Tag
   deleteSkill(id: number) {
-    this.searchText = "";
+    this.searchSkill = "";
     this.skills = this.skills.filter(g => {
       if (g.id == id)
         g.selected = false;
@@ -89,6 +108,6 @@ export class HomePage {
 
   //Clear Render Skill by X-user
   clearFilter() {
-    this.searchText = "";
+    this.searchSkill = "";
   }
 }
