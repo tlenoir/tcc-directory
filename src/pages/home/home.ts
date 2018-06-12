@@ -4,8 +4,6 @@ import { Platform } from "ionic-angular";
 import { GetSkillsProvider } from './../../providers/get-skills/get-skills';
 import { GetBusinessesProvider } from './../../providers/get-businesses/get-businesses';
 import { RootObjectSkills } from '../../providers/models/skills';
-import { RootObjectBusinesses } from '../../providers/models/businesses';
-import { Fatum } from '../../providers/models/fatum';
 
 
 
@@ -19,62 +17,50 @@ export class HomePage {
 
   // getSkills ya
   data_skills: RootObjectSkills;
-  data_businesses: RootObjectBusinesses;
-  data_businesses_fatum: Fatum[];
-
+  data_businessesALLO;
   skills = [];
-  
+
 
   // selected_count use to '*ngIF' => "SHOW_SKILL"
   selected_count: number = 0;
   selected_skills;
 
   constructor(public platform: Platform,
-  private gsp: GetSkillsProvider,
-private gbp: GetBusinessesProvider) {
+    private gsp: GetSkillsProvider,
+    private gbp: GetBusinessesProvider) {
 
     platform.ready().then(() => {
       this.getData();
       this.getSelected();
 
     });
-    
+
   }
 
   // ================================================
 
-  getData(){
+  getData() {
     this.gsp.getSkillsData().subscribe(data => {
       this.data_skills = data;
       this.skills = this.data_skills.data;
-
-      console.log("skills: ", this.skills);
-    });
-
-    this.gbp.getBusinessesData().subscribe(data => {
-      this.data_businesses = data;
-      this.data_businesses_fatum = this.data_businesses.data;
-
-      console.log("businessesFatum: ", this.data_businesses_fatum);
-    });
-
+    })
+    this.gbp.getBusinessesData().then(data => {
+      this.data_businessesALLO = data;
+    })
   }
-  
 
-  
+
+
 
 
   // ================================================
-
-
-  // Data Object to List Skills
 
   // Getting Selected Skills and Count
   getSelected() {
     this.selected_skills = this.skills.filter(s => {
       return s.selected;
 
-      
+
     });
     console.log(this.selected_skills);
     this.selected_count = this.selected_skills.length;
