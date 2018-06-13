@@ -27,32 +27,33 @@
     </div> 
   -->
 <ion-menu slide="right" [content]="mycontent">
-    <ion-header>
-        <ion-navbar>
-            <ion-title>Select ton SKILL, bro :</ion-title>
-        </ion-navbar>
-      </ion-header>
+  <ion-header>
+    <ion-navbar>
+      <ion-title>Select ton SKILL, bro :</ion-title>
+    </ion-navbar>
+  </ion-header>
 
-  
-<ion-content>
+
+  <ion-content>
     <!-- Skill List -->
     <ul class="skill-list">
-      <li *ngFor="let g of skills | filter : searchSkill" class="skill-item">
+      <ion-item *ngFor="let g of skills | filter : searchSkill" class="skill-item">
         <input (change)="getSelectedSkills()" type="checkbox" name="skills" value="{{g.id}}" [(ngModel)]="g.selected" />
         <span class="skill-text">{{g.name}}</span>
-      </li>
+      </ion-item>
     </ul>
 
-</ion-content>
+  </ion-content>
 </ion-menu>
+<ion-header>
+  <ion-navbar>
+    <ion-title>Cool Bro'! Faite ton Skill</ion-title>
+  </ion-navbar>
+</ion-header>
 
 <ion-content padding>
-    <ion-header>
-        <ion-navbar>
-            <ion-title>Cool Bro'! Faite ton Skill</ion-title>
-        </ion-navbar>
-      </ion-header>
-    
+
+
 
   <ion-list *ngIf="selected_count">
     <ion-item *ngFor="let xyz of selected_businessesRoot | unique: 'name'" (click)="toDetailsPage(xyz.id)">
@@ -67,10 +68,17 @@
 
   <!-- Clear Link -->
   <ion-fab bottom right>
-      <button ion-fab class="clear-selection" title="Clear Selections" (click)="clearSelection()" *ngIf="selected_count">
-        <ion-icon name="trash"></ion-icon>
-      </button>
-    </ion-fab>
+    <button ion-fab class="clear-selection" title="Clear Selections" (click)="clearSelection()" *ngIf="selected_count">
+      <ion-icon name="trash"></ion-icon>
+    </button>
+  </ion-fab>
+
+  <!--toogleMenu-->
+  <ion-fab bottom right>
+    <button ion-fab class="clear-selection" title="Clear Selections" menuToggle *ngIf="!selected_count">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+  </ion-fab>
 
 
 </ion-content>
