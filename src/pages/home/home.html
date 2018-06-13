@@ -4,33 +4,37 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
 
-  <ion-navbar>
-    <ion-title>Cool Bro'! Faite ton Skill</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-
-<ion-content padding>
-
-  <div>
-    <!-- Heading Title -->
-    <h4 class="app-heading">Select ton SKILL, bro :</h4>
-
-    <!-- Search Skill -->
-    <!-- <div>
+<!-- 
+  Search Skill 
+        <div>
       <div class="filter-wrap">
         <input [(ngModel)]="searchSkill" placeholder="hum?" class="filter-input">
         <span class="filter-clear" *ngIf="searchSkill.length>0" (click)="clearFilter()">
           <ion-icon name="close"></ion-icon>
         </span>
       </div>
-    </div> -->
-    <!-- Clear Link -->
-    <div class="clear-selection" title="Clear Selections" (click)="clearSelection()" *ngIf="selected_count">Clear</div>
+    </div> 
+   Selected Skills-
+         <div class="selected-skill-wrap">
+      <div class="selected-skill" *ngFor="let s of selected_skills">
+        <span>{{s.name}}
+          <span class="delete-skill" (click)="deleteSkill(s.id)" title="Click to delete">
+            <ion-icon name="close"></ion-icon>
+          </span>
+        </span>
+      </div>
+    </div> 
+  -->
+<ion-menu slide="right" [content]="mycontent">
+    <ion-header>
+        <ion-navbar>
+            <ion-title>Select ton SKILL, bro :</ion-title>
+        </ion-navbar>
+      </ion-header>
 
+  
+<ion-content>
     <!-- Skill List -->
     <ul class="skill-list">
       <li *ngFor="let g of skills | filter : searchSkill" class="skill-item">
@@ -39,27 +43,36 @@
       </li>
     </ul>
 
-    <!-- Selected Skills-->
-    <!-- <div class="selected-skill-wrap">
-      <div class="selected-skill" *ngFor="let s of selected_skills">
-        <span>{{s.name}}
-          <span class="delete-skill" (click)="deleteSkill(s.id)" title="Click to delete">
-            <ion-icon name="close"></ion-icon>
-          </span>
-        </span>
-      </div>
-    </div> -->
+</ion-content>
+</ion-menu>
 
-  </div>
+<ion-content padding>
+    <ion-header>
+        <ion-navbar>
+            <ion-title>Cool Bro'! Faite ton Skill</ion-title>
+        </ion-navbar>
+      </ion-header>
+    
 
   <ion-list *ngIf="selected_count">
-    <ion-item *ngFor="let xyz of selected_businessesRoot | unique: 'name'" (click)="toDetailsPage(xyz.id)" >
+    <ion-item *ngFor="let xyz of selected_businessesRoot | unique: 'name'" (click)="toDetailsPage(xyz.id)">
       <ion-avatar>
         <img [src]="xyz.logo" />
       </ion-avatar>
       {{xyz.name}}
-      <ion-badge *ngFor="let uvw of xyz.skills" >{{uvw.name}}</ion-badge>
+      <ion-badge *ngFor="let uvw of xyz.skills">{{uvw.name}}</ion-badge>
     </ion-item>
   </ion-list>
 
+
+  <!-- Clear Link -->
+  <ion-fab bottom right>
+      <button ion-fab class="clear-selection" title="Clear Selections" (click)="clearSelection()" *ngIf="selected_count">
+        <ion-icon name="trash"></ion-icon>
+      </button>
+    </ion-fab>
+
+
 </ion-content>
+
+<ion-nav #mycontent></ion-nav>
