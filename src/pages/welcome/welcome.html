@@ -1,18 +1,36 @@
-<!--
-  Generated template for the WelcomePage page.
+<ion-content>
+  <ion-slides pager>
+    <ion-slide>
+      <div class="diag" style="background: url('')">
+        <ion-icon></ion-icon>
+      </div>
+      <div>
+        <h1>Bienvenue</h1>
+        <h3>Tahiti Code Camp Drectory</h3>
+        <p>Permet de rechercher des professionnels de l'informatique selon leurs compétences</p>
+      </div>
+    </ion-slide>
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
+    <ion-slide>
+      <div class="diag" style="background: url('')">
+        <ion-icon></ion-icon>
+      </div>
+      <div>
+        <h2>Profil du professionnels</h2>
+        <p>Accés libre aux fiches techniques et informatives des professionnels</p>
+      </div>
+    </ion-slide>
 
-  <ion-navbar>
-    <ion-title>welcome</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-
-<ion-content padding>
-
+    <ion-slide>
+      <div class="diag" style="background: url('')">
+        <ion-icon></ion-icon>
+      </div>
+      <div>
+        <h2>Gélocalisation</h2>
+        <p> Disponibilité d'une MAPS pour localiser facilement un professionnel déterminer le trajet à parcourir</p>
+      </div>
+      <ion-checkbox color="dark" (ionChange)="updateCucumber()" ></ion-checkbox>      
+    </ion-slide>
+  </ion-slides>
+  <button (click)="skip()" id="skip">{{ skipMsg }}</button>  
 </ion-content>

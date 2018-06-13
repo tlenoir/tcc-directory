@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="tcc-taj@gmail.com" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.TahitiCodeCamp.TAJ" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>TCC Directory</name>
     <description>A TCC PROJECT by TAJ.</description>
     <author email="tcc-taj@gmail.com" href="http://ionicframework.com/">TAJ - TCC</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://192.168.10.121:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -88,4 +88,6 @@
         <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="To locate you" />
     </plugin>
     <plugin name="mx.ferreyra.callnumber" spec="~0.0.2" />
+    <allow-navigation href="http://192.168.10.121:8100" />
+    <engine name="android" spec="7.0.0" />
 </widget>
