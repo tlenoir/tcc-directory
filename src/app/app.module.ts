@@ -12,8 +12,9 @@ import { WelcomePage } from '../pages/welcome/welcome';
 import { SQLite } from '@ionic-native/sqlite';
 import { SMS } from '@ionic-native/sms';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { Geolocation } from '@ionic-native/geolocation';
 import { CallNumber } from '@ionic-native/call-number';
+import { Geolocation } from '@ionic-native/geolocation';
+import { GoogleMaps } from '@ionic-native/google-maps'
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { CallNumber } from '@ionic-native/call-number';
     SMS,
     InAppBrowser,
     Geolocation,
+    GoogleMaps,
     CallNumber
   ]
 })

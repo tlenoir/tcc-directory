@@ -1,18 +1,94 @@
-<!--
-  Generated template for the DetailsPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
-
-  <ion-navbar>
-    <ion-title>details</ion-title>
-  </ion-navbar>
-
+<ion-header no-border>
+  <ion-navbar transparent> </ion-navbar>
 </ion-header>
 
+<ion-content fullscreen="true">
 
-<ion-content padding>
+  <div class="topMap">
+    <div id="map_canvas" [style.height.px]="mapHeight" [style.width.px]="mapWidth "> </div>
+  </div>
+
+
+<!--   <button ion-button full (click)="next()" class="btnScroll" [style.top.px]="mapHeight">Scroll</button> -->
+
+
+  <div class="contentDetail" >
+    <div class="Transparentdetail"  [style.height.px]="transparentDetail" (tap)="swipeEvent($event)"></div>
+
+    <div  [style.height.px]="detailHeight" class="detail">
+
+      <ion-row align-items: stretch>
+        <button ion-button ion-col grid-columns="3" (click)="Call()" class="BtnCom">
+          <ion-icon name="md-call"> </ion-icon>
+        </button>
+        <ion-avatar class="avatar" ion-col grid-columns="3" >
+          <img src="assets/imgs/pro.png">
+        </ion-avatar>
+        <button ion-button ion-col grid-columns="3" (click)="Sms()" class="BtnCom">
+          <ion-icon name="md-mail"> </ion-icon>
+        </button>
+      </ion-row>
+
+      <ion-row align-self: center>
+        <h1 ion-col grid-columns="12">Tahiti Code Camp </h1>
+      </ion-row>
+
+      <ion-row align-items: center>
+        <button ion-fab mini (click)="openWebsite()">
+          <ion-icon name="md-globe"></ion-icon>
+        </button>
+        <button ion-fab mini (click)="openFacebook()">
+          <ion-icon name="logo-facebook"></ion-icon>
+        </button>
+        <button ion-fab mini (click)="openTwitter()">
+          <ion-icon name="logo-twitter"></ion-icon>
+        </button>
+        <button ion-fab mini (click)="openLinkInn()">
+          <ion-icon name="logo-linkedin"></ion-icon>
+        </button>
+        <button ion-fab mini>
+          <ion-icon name="star"></ion-icon>
+        </button>
+      </ion-row>
+
+      <ion-segment [(ngModel)]="segment" class="SegmentDetail">
+        <ion-segment-button value="Detail" ion-col grid-columns="6" class="btndetail">
+          Detail
+        </ion-segment-button>
+        <ion-segment-button value="Competences" ion-col grid-columns="6" class="btncompetences">
+          Competences
+        </ion-segment-button>
+      </ion-segment>
+
+      <div [ngSwitch]="segment">
+        <ion-list *ngSwitchCase="'Detail'">
+          <ion-item class="switch">
+            <ion-icon name="mail"> Email:</ion-icon>
+            <br>
+            <ion-icon name="phone-portrait"> Mobile: </ion-icon>
+            <br>
+            <ion-icon name="call"> Téléphone:</ion-icon>
+            <br>
+            <ion-icon name="time"> Horaire d'ouverture: </ion-icon>
+            <br>
+          </ion-item>
+        </ion-list>
+
+        <ion-list *ngSwitchCase="'Competences'">
+          <ion-item>
+            <!-- <ion-item *ngFor="let a of i ">
+                      <ion-avatar>
+                        <img src="../../assets/imgs/skills{{ a }}.svg">
+                      </ion-avatar>
+                    </ion-item> -->
+          </ion-item>
+        </ion-list>
+
+      </div>
+    </div>
+
+  </div>
+
+
 
 </ion-content>
