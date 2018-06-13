@@ -16,7 +16,7 @@ export class GetBusinessesProvider {
 
   urlBusinesses: string = 'http://tccdirectory.1click.pf/api/businesses?page=';
 
-  template_businesses: Fatum[]
+  template_businesses: Fatum[];
   businesses = [];
   pageTotal: number;
   Rootas = [];
@@ -27,7 +27,7 @@ export class GetBusinessesProvider {
 
   // return ALL data from ALL pages of businessesPage : 1 n 2 in our API
   getBusinessesData() {
-    return new Promise(resolveBusinesses => {
+    return new Promise<Fatum[]>(resolveBusinesses => {
       this.http.get<RootObjectBusinesses>(this.urlBusinesses)
       .subscribe(data => {
           this.pageTotal = data.last_page;
@@ -41,7 +41,6 @@ export class GetBusinessesProvider {
     if (pushies+1 == this.pageTotal) {
       resolveBusinesses(this.businesses)
     }
-    console.log("businesses "+pushies, this.businesses);
                 })
             }
       })

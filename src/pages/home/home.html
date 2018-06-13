@@ -34,7 +34,7 @@
     <!-- Skill List -->
     <ul class="skill-list">
       <li *ngFor="let g of skills | filter : searchSkill" class="skill-item">
-        <input (change)="getSelected()" type="checkbox" name="skills" value="{{g.id}}" [(ngModel)]="g.selected" />
+        <input (change)="getSelectedSkills()" type="checkbox" name="skills" value="{{g.id}}" [(ngModel)]="g.selected" />
         <span class="skill-text">{{g.name}}</span>
       </li>
     </ul>
@@ -52,12 +52,13 @@
 
   </div>
 
-  <ion-list>
-    <ion-item *ngFor="let xyz of data_businessesALLO">
+  <ion-list *ngIf="selected_count">
+    <ion-item *ngFor="let xyz of selected_businessesRoot" (click)="toDetailsPage(xyz.id)" >
       <ion-avatar>
         <img [src]="xyz.logo" />
       </ion-avatar>
       {{xyz.name}}
+      <ion-badge *ngFor="let uvw of xyz.skills" >{{uvw.name}}</ion-badge>
     </ion-item>
   </ion-list>
 
