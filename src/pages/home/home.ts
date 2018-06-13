@@ -110,7 +110,7 @@ public navCtrl: NavController) {
     for (let i = 0; i < this.selected_businesses.length; i++) {
       const element1 = this.selected_businesses[i];
       const template = element1.name;
-      for (let e = 1; e < this.selected_businesses.length; e++) {
+      for (let e = 0; e < this.selected_businesses.length; e++) {
         const element2 = this.selected_businesses[e];
         const template2 = element2.name;
 
@@ -125,6 +125,7 @@ public navCtrl: NavController) {
       
     }
     this.selected_count = this.selected_skills.length;
+    console.log("total ya", this.selected_businessesRoot.length);
     //alert(this.selected_skills);
   }
 

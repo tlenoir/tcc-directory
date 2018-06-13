@@ -2,7 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({
   name: 'filter'
 })
-export class FilterPipe implements PipeTransform {
+export class FilterSkillPipe implements PipeTransform {
   transform(items: any[], searchSkill: string): any[] {
     if(!items) return [];
     if(!searchSkill) return items;

@@ -1,5 +1,6 @@
+import { FilterUniquePipe } from './../pipes/filter-unique/filter-unique';
 import { HomePage } from './../pages/home/home';
-import { FilterPipe } from './../pipes/filter/filter';
+import { FilterSkillPipe } from './../pipes/filter/filter';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -26,7 +27,8 @@ import { GetBusinessesProvider } from '../providers/get-businesses/get-businesse
     DetailsPage,
     WelcomePage,
     HomePage,
-    FilterPipe
+    FilterSkillPipe,
+    FilterUniquePipe
   ],
   imports: [
     BrowserModule,
