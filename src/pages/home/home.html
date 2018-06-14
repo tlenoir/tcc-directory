@@ -38,8 +38,11 @@
     <!-- Skill List -->
     <ul class="skill-list">
       <ion-item *ngFor="let g of skills | filter : searchSkill" class="skill-item">
-        <input (change)="getSelectedSkills()" type="checkbox" name="skills" value="{{g.id}}" [(ngModel)]="g.selected" />
-        <span class="skill-text">{{g.name}}</span>
+        <label class="container">{{g.name}}
+        <input class="checkbox" checked="checked" (change)="getSelectedData()" type="checkbox" name="skills" value="{{g.id}}" [(ngModel)]="g.selected" />
+        <span class="checkmark"></span>
+      </label>
+
       </ion-item>
     </ul>
 
@@ -55,13 +58,16 @@
 
 
 
-  <ion-list *ngIf="selected_count">
+  <ion-list *ngIf="selected_count; else noOeuvres">
     <ion-item *ngFor="let xyz of selected_businessesRoot | unique: 'name'" (click)="toDetailsPage(xyz.id)">
-      <ion-avatar>
-        <img [src]="xyz.logo" />
+      <ion-avatar item-start>
+          <img [src]="xyz.logo" />
       </ion-avatar>
-      {{xyz.name}}
+      <h3>{{xyz.name}}</h3>
       <ion-badge *ngFor="let uvw of xyz.skills">{{uvw.name}}</ion-badge>
+      <button (click)="favoris(xyz, $event)" item-end large>
+      <ion-icon class="fav_icon" [name]=" isfavoris ? 'star' : 'star-outline'"></ion-icon>
+    </button>
     </ion-item>
   </ion-list>
 
@@ -76,11 +82,24 @@
   <!--toogleMenu-->
   <ion-fab bottom right>
     <button ion-fab class="clear-selection" title="Clear Selections" menuToggle *ngIf="!selected_count">
-      <ion-icon name="menu"></ion-icon>
+      <ion-icon name="funnel"></ion-icon>
     </button>
   </ion-fab>
 
+  <ng-template #noOeuvres>
+      
+          <div class="p_desole">
+      
+            <p>Utilisez le fitre de recherche !
+      
+              <ion-icon class="concombre" name="flag" item-left></ion-icon>
+            </p>
+          </div>
+    </ng-template>
+
 
 </ion-content>
+
+
 
 <ion-nav #mycontent></ion-nav>

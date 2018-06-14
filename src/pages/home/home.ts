@@ -10,9 +10,12 @@ import { GetBusinessesProvider } from './../../providers/get-businesses/get-busi
 
 
 // this is the INTERFACE type of data from API : call MODELS
-import { RootObjectBusinesses } from './../../providers/models/businesses';
+//import { RootObjectBusinesses } from './../../providers/models/businesses';
 import { RootObjectSkills } from '../../providers/models/skills';
 import { Fatum } from '../../providers/models/fatum';
+import { Galum } from './../../providers/models/galum';
+import { RootObject } from './../../providers/modeles/businesses';
+
 
 
 
@@ -24,9 +27,12 @@ export class HomePage {
 
   // normalize variable
   name: string;
+  isfavoris: boolean = false;
+  isTrueSelected_skills: number;
+  idToGetSkills = [];
+  templateGetBusinesses: RootObject;
   searchSkill: string = "";
-  urlBusinesses: string = 'http://tccdirectory.1click.pf/api/businesses';
-  TotalBusinessesMan: number;
+
   // selected_count use to '*ngIF' => "SHOW_SKILL"
   selected_count: number = 0;
 
@@ -36,9 +42,9 @@ export class HomePage {
   skills = [];
 
   // vartiable usse to stock businesses info
-  selected_businesses: Fatum[];
-  data_businesses: Fatum[];
-  selected_businessesRoot = [];
+  // selected_businesses: Fatum[];
+  // data_businesses: Fatum[];
+  selected_businessesRoot;
 
 
   constructor(public platform: Platform,
@@ -48,14 +54,9 @@ export class HomePage {
     public navCtrl: NavController) {
 
     platform.ready().then(() => {
-      
-      // from API, get Total of Businesses'Man
-      this.http.get<RootObjectBusinesses>(this.urlBusinesses)
-        .subscribe(data => {
-          this.TotalBusinessesMan = data.total;
-        })
+    
       this.getData();
-      this.getSelectedSkills();
+      this.getSelectedData();
 
     });
 
@@ -69,11 +70,33 @@ export class HomePage {
     this.gsp.getSkillsData().subscribe(data => {
       this.data_skills = data;
       this.skills = this.data_skills.data;
-    })
-    this.gbp.getBusinessesData().then(data => {
-      this.data_businesses = data;
 
     })
+  }
+  // ================================================
+
+  // Getting Selected Skills, Selected Buisinesses and 'Count to decide SHOW or NOT'
+  getSelectedData() {
+    this.selected_skills = this.skills.filter(s => {
+      return s.selected;
+    })
+
+    this.idToGetSkills = []
+    for (var i = 0; i < this.selected_skills.length; i++) {
+      var element: Galum = this.selected_skills[i];
+      var template = element.selected;
+      if (template) {
+        this.idToGetSkills = this.idToGetSkills.concat(element.id)
+      }
+    }
+    this.gbp.getBusinessesDataById(this.templateGetBusinesses, this.idToGetSkills)
+      .subscribe( dataBusinesses => {
+        this.selected_businessesRoot = dataBusinesses;
+      })
+   
+    this.selected_count = this.selected_skills.length;
+    //if selected_count isworth 0 then 'DONT SHOW LIST_of_businesses_man'
+    //alert(this.selected_skills);
   }
   // ================================================
 
@@ -85,50 +108,6 @@ export class HomePage {
 
 
     })
-    this.selected_businesses = []
-    for (let i = 0; i < this.TotalBusinessesMan; i++) {
-      const element1 = this.data_businesses[i];
-      const element2 = element1.skills;
-      for (let e = 0; e < element2.length; e++) {
-        const element3 = element2[e];
-        const element4 = element3.id;
-        for (let a = 0; a < this.selected_skills.length; a++) {
-          const element5 = this.selected_skills[a];
-          const element6 = element5.id;
-
-          if (element4 == element6) {
-
-            this.selected_businesses = this.selected_businesses.concat(element1);
-            break;
-
-          }
-
-        }
-
-      }
-
-    }
-    this.selected_businessesRoot = []
-    for (let i = 0; i < this.selected_businesses.length; i++) {
-      const element1 = this.selected_businesses[i];
-      const template = element1.name;
-      for (let e = 0; e < this.selected_businesses.length; e++) {
-        const element2 = this.selected_businesses[e];
-        const template2 = element2.name;
-
-        if (template != template2) {
-
-          this.selected_businessesRoot = this.selected_businessesRoot.concat(element1);
-          break;
-
-        } else break;
-
-      }
-
-    }
-    this.selected_count = this.selected_skills.length;
-    //if selected_count isworth 0 then 'DONT SHOW LIST_of_businesses_man'
-    //alert(this.selected_skills);
   }
 
   // Clearing All Selections
@@ -138,7 +117,7 @@ export class HomePage {
       g.selected = false;
       return true;
     });
-    this.getSelectedSkills();
+    this.getSelectedData();
   }
 
   //Delete Single Listed Skill Tag
@@ -150,7 +129,7 @@ export class HomePage {
 
       return true;
     });
-    this.getSelectedSkills();
+    this.getSelectedData();
   }
 
   //Clear Render Skill by X-user
@@ -163,5 +142,11 @@ export class HomePage {
 
     this.navCtrl.push(DetailsPage, { idal: id });
 
+  }
+
+  // favoris button
+  favoris(data, event: Event){
+    event.stopPropagation();
+    this.isfavoris = !this.isfavoris
   }
 }

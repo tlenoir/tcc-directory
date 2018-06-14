@@ -1,6 +1,8 @@
-import { FilterUniquePipe } from './../pipes/filter-unique/filter-unique';
 import { HomePage } from './../pages/home/home';
 import { FilterSkillPipe } from './../pipes/filter/filter';
+import { GetBusinessesProvider } from './../providers/get-businesses/get-businesses';
+import { GetSkillsProvider } from './../providers/get-skills/get-skills';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -14,21 +16,23 @@ import { WelcomePage } from '../pages/welcome/welcome';
 import { SQLite } from '@ionic-native/sqlite';
 import { SMS } from '@ionic-native/sms';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { Geolocation } from '@ionic-native/geolocation';
 import { CallNumber } from '@ionic-native/call-number';
+import { Geolocation } from '@ionic-native/geolocation';
+import { GoogleMaps } from '@ionic-native/google-maps';
 import { HttpClientModule } from '@angular/common/http';
-import { GetSkillsProvider } from '../providers/get-skills/get-skills';
-import { GetBusinessesProvider } from '../providers/get-businesses/get-businesses';
+import { GetBusinessesIdProvider } from '../providers/get-businesses-id/get-businesses-id';
+import { FilterUniquePipe } from '../pipes/filter-unique/filter-unique';
+
 
 
 @NgModule({
   declarations: [
     MyApp,
     DetailsPage,
-    WelcomePage,
     HomePage,
+    WelcomePage,
     FilterSkillPipe,
-    FilterUniquePipe
+    FilterUniquePipe,
   ],
   imports: [
     BrowserModule,
@@ -50,9 +54,11 @@ import { GetBusinessesProvider } from '../providers/get-businesses/get-businesse
     SMS,
     InAppBrowser,
     Geolocation,
+    GoogleMaps,
     CallNumber,
     GetSkillsProvider,
-    GetBusinessesProvider
+    GetBusinessesProvider,
+    GetBusinessesIdProvider
   ]
 })
 export class AppModule {}

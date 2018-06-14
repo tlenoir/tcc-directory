@@ -8,45 +8,35 @@ import { Injectable } from '@angular/core';
   and Angular DI.
 */
 
-import { RootObjectBusinesses } from "./../models/businesses";
-import { Fatum } from './../models/fatum';
+//import { Fatum } from './../models/fatum';
+import { RootObject } from "../modeles/businesses";
 
 @Injectable()
 export class GetBusinessesProvider {
-
-  urlBusinesses: string = 'http://tccdirectory.1click.pf/api/businesses?page=';
-
-  template_businesses: Fatum[];
-  businesses = [];
-  pageTotal: number;
-  Rootas = [];
+  urlPostBusinesses: string = 'http://tccdirectory.1click.pf/api/search?skills=';
+  templateBusinessesById = [];
+  data : RootObject;
+  getData ;
+  lemot;
 
   constructor(public http: HttpClient) {
     console.log('Hello GetBusinessesProvider Provider');
   }
 
-  // return ALL data from ALL pages of businessesPage : 1 n 2 in our API
-  getBusinessesData() {
-    return new Promise<Fatum[]>(resolveBusinesses => {
-      this.http.get<RootObjectBusinesses>(this.urlBusinesses)
-        .subscribe(data => {
-          this.pageTotal = data.last_page;
-          for (let pushies = 0; pushies < this.pageTotal; pushies++) {
-            this.Rootas[pushies] = pushies + 1;
-            this.http.get<RootObjectBusinesses>(this.urlBusinesses + (pushies + 1))
-              .subscribe(dataYA => {
-                this.template_businesses = dataYA.data;
-                this.businesses = this.businesses.concat(this.template_businesses);
+  getBusinessesDataById(bySkill: RootObject, id=[]){
+    this.lemot = "";
 
-                if (pushies + 1 == this.pageTotal) {
-                  resolveBusinesses(this.businesses)
-                }
-              })
-          }
-        })
-    })
-
+    // buildFactory world as ' 8,13,6 ' for example
+    for (var i = 0; i < id.length; i++) {
+      var element = id[i];
+      if (i+1 != id.length) {
+        this.lemot = this.lemot+element+",";
+      } else {
+        this.lemot = this.lemot+element;
+      }
+      
+    }
+    return this.http.post(this.urlPostBusinesses+this.lemot, bySkill)
   }
-
 
 }
