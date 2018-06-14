@@ -1,5 +1,10 @@
 page-home {
 
+  .fav_icon{
+
+    font-size: 1.7em;
+  }
+
 
     .p_desole{
         position: absolute;
@@ -15,13 +20,6 @@ page-home {
         margin-left: 1%;
     }
 
-    ion-avatar{
-        display: inline-block;
-        vertical-align: middle;
-    }
-    // ion-badge{
-    //     vertical-align: bottom;
-    // }
     /* Customize the label (the container) */
 .container {
     display: block;

@@ -1,4 +1,3 @@
-import { RootObject } from './../../providers/modeles/businesses';
 import { DetailsPage } from './../details/details';
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -15,6 +14,8 @@ import { GetBusinessesProvider } from './../../providers/get-businesses/get-busi
 import { RootObjectSkills } from '../../providers/models/skills';
 import { Fatum } from '../../providers/models/fatum';
 import { Galum } from './../../providers/models/galum';
+import { RootObject } from './../../providers/modeles/businesses';
+
 
 
 
@@ -26,7 +27,7 @@ export class HomePage {
 
   // normalize variable
   name: string;
-  fav;
+  isfavoris: boolean = false;
   isTrueSelected_skills: number;
   idToGetSkills = [];
   templateGetBusinesses: RootObject;
@@ -133,14 +134,8 @@ export class HomePage {
   }
 
   // favoris button
-  favoris(){
-
-    if (this.fav == false) {
-
-      this.fav = true
-      
-    } else {
-      this.fav = false
-    }
+  favoris(data, event: Event){
+    event.stopPropagation();
+    this.isfavoris = !this.isfavoris
   }
 }
