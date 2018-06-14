@@ -9,7 +9,7 @@ import { Injectable } from '@angular/core';
 */
 
 //import { Fatum } from './../models/fatum';
-import { RootObject } from "../modeles/businesses";
+import { RootObject } from "../models/businesses";
 
 @Injectable()
 export class GetBusinessesProvider {

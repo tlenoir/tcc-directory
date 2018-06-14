@@ -12,9 +12,8 @@ import { GetBusinessesProvider } from './../../providers/get-businesses/get-busi
 // this is the INTERFACE type of data from API : call MODELS
 //import { RootObjectBusinesses } from './../../providers/models/businesses';
 import { RootObjectSkills } from '../../providers/models/skills';
-import { Fatum } from '../../providers/models/fatum';
 import { Galum } from './../../providers/models/galum';
-import { RootObject } from './../../providers/modeles/businesses';
+import { RootObject } from './../../providers/models/businesses';
 
 
 
@@ -61,8 +60,14 @@ export class HomePage {
     });
 
   }
+  // goTo Details Page with ID of businesses'man
+  toDetailsPage(id) {
 
-  // ================================================
+    this.navCtrl.push(DetailsPage, { idal: id });
+
+  }
+
+  // ================== GETTING DATA SKILLS ========
 
   // hum... GET_ALL(data) from API
 
@@ -73,7 +78,7 @@ export class HomePage {
 
     })
   }
-  // ================================================
+  // =================== GETTING BUSINESSES MAN BY ID OF SKILLS ==============
 
   // Getting Selected Skills, Selected Buisinesses and 'Count to decide SHOW or NOT'
   getSelectedData() {
@@ -93,22 +98,11 @@ export class HomePage {
       .subscribe( dataBusinesses => {
         this.selected_businessesRoot = dataBusinesses;
       })
-   
+   //if selected_count isworth 0 then 'DONT SHOW LIST_of_businesses_man'
     this.selected_count = this.selected_skills.length;
-    //if selected_count isworth 0 then 'DONT SHOW LIST_of_businesses_man'
-    //alert(this.selected_skills);
   }
-  // ================================================
 
-  // Getting Selected Skills, Selected Buisinesses and 'Count to decide SHOW or NOT'
-  getSelectedSkills() {
-
-    this.selected_skills = this.skills.filter(s => {
-      return s.selected;
-
-
-    })
-  }
+  // ======================= SCRUD LIST_VIEW =================
 
   // Clearing All Selections
   clearSelection() {
@@ -137,16 +131,13 @@ export class HomePage {
     this.searchSkill = "";
   }
 
-  // goTo Details Page with ID of businesses'man
-  toDetailsPage(id) {
-
-    this.navCtrl.push(DetailsPage, { idal: id });
-
-  }
-
   // favoris button
   favoris(data, event: Event){
     event.stopPropagation();
-    this.isfavoris = !this.isfavoris
+    this.isfavoris = !this.isfavoris;
   }
+
+  // ======================== FAVORIS METHOD SQLITE ================
+
+
 }

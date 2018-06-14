@@ -16,7 +16,7 @@ page-home {
         justify-content: center;
         font-size: 22px;
     }
-    .concombre{
+    .flag{
         margin-left: 1%;
     }
 
@@ -27,7 +27,7 @@ page-home {
     padding-left: 35px;
     margin-bottom: 12px;
     cursor: pointer;
-    font-size: 22px;
+    font-size: 1.5em;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -52,8 +52,14 @@ page-home {
   }
   
   /* On mouse-over, add a grey background color */
+
+  .skill-item:hover{
+
+    background-color: blueviolet;
+
+  }
   .container:hover input ~ .checkmark {
-    background-color: #ccc;
+    background-color: rgba(222, 218, 226, 0.836);
   }
   
   /* When the checkbox is checked, add a blue background */
