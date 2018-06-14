@@ -15,6 +15,11 @@
 
 
   <ion-content>
+    <ion-buttons>
+      <button (click)="goToFavoritePage()" >
+        favoris
+      </button>
+    </ion-buttons>
     <!-- Skill List -->
     <ul class="skill-list">
       <ion-item *ngFor="let g of skills | filter : searchSkill" class="skill-item">

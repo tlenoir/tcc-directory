@@ -1,3 +1,4 @@
+import { FavoritePage } from './../favorite/favorite';
 import { DetailsPage } from './../details/details';
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -13,7 +14,8 @@ import { GetBusinessesProvider } from './../../providers/get-businesses/get-busi
 //import { RootObjectBusinesses } from './../../providers/models/businesses';
 import { RootObjectSkills } from '../../providers/models/skills';
 import { Galum } from './../../providers/models/galum';
-import { RootObject } from './../../providers/models/businesses';
+import { RootObjectBusinesses } from './../../providers/models/businesses';
+import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 
 
 
@@ -26,10 +28,11 @@ export class HomePage {
 
   // normalize variable
   name: string;
+  data: SQLiteObject;
   isfavoris: boolean = false;
   isTrueSelected_skills: number;
   idToGetSkills = [];
-  templateGetBusinesses: RootObject;
+  templateGetBusinesses: RootObjectBusinesses;
   searchSkill: string = "";
 
   // selected_count use to '*ngIF' => "SHOW_SKILL"
@@ -50,7 +53,8 @@ export class HomePage {
     private gsp: GetSkillsProvider,
     private gbp: GetBusinessesProvider,
     public http: HttpClient,
-    public navCtrl: NavController) {
+    public navCtrl: NavController,
+    private sqlite: SQLite) {
 
     platform.ready().then(() => {
 
@@ -131,13 +135,10 @@ export class HomePage {
     this.searchSkill = "";
   }
 
-  // favoris button
-  favoris(data, event: Event) {
-    event.stopPropagation();
-    this.isfavoris = !this.isfavoris;
+  // ======================== FAVORIS METHOD STORAGE/SQLITE ================
+
+  goToFavoritePage(){
+    this.navCtrl.push(FavoritePage);
   }
-
-  // ======================== FAVORIS METHOD SQLITE ================
-
 
 }

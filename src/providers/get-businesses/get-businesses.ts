@@ -7,13 +7,13 @@ import { Injectable } from '@angular/core';
   See https://angular.io/guide/dependency-injection for more info on providers
   and Angular DI.
 */
-import { RootObject } from "../models/businesses";
+import { RootObjectBusinesses } from "../models/businesses";
 
 @Injectable()
 export class GetBusinessesProvider {
   
   urlPostBusinesses: string = 'http://tccdirectory.1click.pf/api/search?skills=';
-  data: RootObject;
+  data: RootObjectBusinesses;
   getData;
 
   // so variable 'lemot' is a string Type,
@@ -26,7 +26,7 @@ export class GetBusinessesProvider {
     console.log('Hello GetBusinessesProvider Provider');
   }
 
-  getBusinessesDataById(bySkill: RootObject, id = []) {
+  getBusinessesDataById(bySkill: RootObjectBusinesses, id = []) {
     this.lemot = "";
 
     // buildFactory world as ' 8,13,6 ' for example

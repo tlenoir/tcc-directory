@@ -46,8 +46,8 @@
         <button ion-fab mini (click)="openlinkInn()">
           <ion-icon name="logo-linkedin"></ion-icon>
         </button>
-        <button ion-fab mini>
-          <ion-icon name="star"></ion-icon>
+        <button ion-fab mini (click)=toggleFavorite()>
+          <ion-icon [name]=" isFavorite ? 'star' : 'star-outline'"></ion-icon>
         </button>
       </ion-row>
 

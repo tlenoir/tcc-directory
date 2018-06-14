@@ -1,3 +1,4 @@
+import { FavoritePage } from './../pages/favorite/favorite';
 import { HomePage } from './../pages/home/home';
 import { FilterSkillPipe } from './../pipes/filter/filter';
 import { GetBusinessesProvider } from './../providers/get-businesses/get-businesses';
@@ -22,6 +23,8 @@ import { GoogleMaps } from '@ionic-native/google-maps';
 import { HttpClientModule } from '@angular/common/http';
 import { GetBusinessesIdProvider } from '../providers/get-businesses-id/get-businesses-id';
 import { FilterUniquePipe } from '../pipes/filter-unique/filter-unique';
+import { FavoriteDataProvider } from '../providers/favorite-data/favorite-data';
+import { IonicStorageModule } from '@ionic/storage';
 
 
 
@@ -33,11 +36,13 @@ import { FilterUniquePipe } from '../pipes/filter-unique/filter-unique';
     WelcomePage,
     FilterSkillPipe,
     FilterUniquePipe,
+    FavoritePage
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    HttpClientModule
+    HttpClientModule,
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -45,6 +50,7 @@ import { FilterUniquePipe } from '../pipes/filter-unique/filter-unique';
     DetailsPage,
     WelcomePage,
     HomePage,
+    FavoritePage
   ],
   providers: [
     StatusBar,
@@ -58,7 +64,8 @@ import { FilterUniquePipe } from '../pipes/filter-unique/filter-unique';
     CallNumber,
     GetSkillsProvider,
     GetBusinessesProvider,
-    GetBusinessesIdProvider
+    GetBusinessesIdProvider,
+    FavoriteDataProvider
   ]
 })
 export class AppModule {}

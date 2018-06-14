@@ -3,8 +3,12 @@ import { GetBusinessesIdProvider } from './../../providers/get-businesses-id/get
 import { InAppBrowser, InAppBrowserOptions } from '@ionic-native/in-app-browser';
 import { SMS, SmsOptionsAndroid } from '@ionic-native/sms';
 import { CallNumber } from '@ionic-native/call-number';
-import { Component, ViewChild, ElementRef  } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController, NavParams, Platform, Slides, ToastController, MenuController } from 'ionic-angular';
+import { RootObjectBusinesses } from '../../providers/models/businesses';
+import { SQLiteObject } from '@ionic-native/sqlite';
+import { FavoriteDataProvider } from '../../providers/favorite-data/favorite-data';
+import { RootObjectBusinessById } from '../../providers/models/businessById';
 //import { GoogleMaps, GoogleMap, GoogleMapsEvent, MarkerOptions, GoogleMapOptions, Marker, LatLng } from '@ionic-native/google-maps';
 
 
@@ -31,12 +35,12 @@ export class DetailsPage {
   //map: GoogleMap;
   mapHeight = 0;
   mapWidth = 0;
-  detaildetailHeight =0;
+  detaildetailHeight = 0;
   detailHeight = 0;
   transparentDetail = 0;
   topAvatar = 0;
   id;
-  business: any;
+  business: RootObjectBusinessById
   detailName: string;
   detailEmail: string;
 
@@ -67,10 +71,13 @@ export class DetailsPage {
   detailsaturday_end: string;
   detailsunday_start: string;
   detailsunday_end: string;
-  detailabus: string;
+  detailabus: number;
   detailcreated_at: string;
   detailupdated_at: string;
   detailskills: string;
+
+  isFavorite: boolean = false;
+  checkedFavorite: RootObjectBusinessById;
 
 
 
@@ -85,66 +92,78 @@ export class DetailsPage {
     private Platform: Platform,
     private call: CallNumber,
     private sms: SMS,
-    private iab: InAppBrowser) {
+    private iab: InAppBrowser,
+    private favoriteDataProvider: FavoriteDataProvider) {
+
     this.Platform.ready().then(() => {
       this.getBusiness();
       this.mapHeight = this.getWindowHeight();
-      this.mapWidth = this.getWindowWidth(); 
+      this.mapWidth = this.getWindowWidth();
       //this.geoloc();
       this.transparentDetail = (this.mapHeight * 0.2);
       this.detailHeight = (this.mapHeight * 0.8);
-      this.detaildetailHeight =(this.mapHeight * 0.33)
+      this.detaildetailHeight = (this.mapHeight * 0.33)
       this.loadMap();
-      
+
 
     })
   }
+  checkedFav(data) {
+    this.checkedFavorite = data;
+    this.favoriteDataProvider
+      .isFavortieData(this.checkedFavorite)
+      .then(value => (this.isFavorite = value));
+  }
 
-  
- 
-  loadMap(){
+  toggleFavorite(): void {
+    this.isFavorite = !this.isFavorite;
+    this.favoriteDataProvider.toogleFavoriteData(this.business);
+  }
+
+
+
+  loadMap() {
 
     //48.858578, 2.294405 Tour Eifel 
- 
+
     let latLng = new google.maps.LatLng(this.detailLat, this.detailLng);
- 
+
     let mapOptions = {
       center: latLng,
       zoom: 15,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     }
- 
+
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
- 
+
   }
 
   //Géolocalisation
 
-/*   geoloc() {
-
-    this.geolocation.getCurrentPosition().then((resp) => {
-      console.log('resp.coords.latitude', resp.coords.latitude)
-      console.log('resp.coords.longitude', resp.coords.longitude)
-    }).catch((error) => {
-      console.log('Error getting location', error);
-    });
-
-    let watch = this.geolocation.watchPosition();
-    watch.subscribe((data) => {
-
-      console.log('resp.coords.latitude', data)
-      console.log('resp.coords.longitude', data)
-      // data can be a set of coordinates, or an error (if an error occurred).
-      // data.coords.latitude
-      // data.coords.longitude
-    });
-  } */
+  /*   geoloc() {
+  
+      this.geolocation.getCurrentPosition().then((resp) => {
+        console.log('resp.coords.latitude', resp.coords.latitude)
+        console.log('resp.coords.longitude', resp.coords.longitude)
+      }).catch((error) => {
+        console.log('Error getting location', error);
+      });
+  
+      let watch = this.geolocation.watchPosition();
+      watch.subscribe((data) => {
+  
+        console.log('resp.coords.latitude', data)
+        console.log('resp.coords.longitude', data)
+        // data can be a set of coordinates, or an error (if an error occurred).
+        // data.coords.latitude
+        // data.coords.longitude
+      });
+    } */
 
   getBusiness() {
 
     this.id = this.navParams.get('idal')
-    this.gbbid.getBusinessById(this.id).subscribe(data => {
-      console.log("getBusiness", data);
+    this.gbbid.getBusinessById(this.id).subscribe((data: RootObjectBusinessById)=> {
       this.business = data;
       this.detailName = this.business.name;
       this.detailEmail = this.business.email;
@@ -152,6 +171,7 @@ export class DetailsPage {
       this.detailLogo = this.business.logo;
       this.detailLat = this.business.latitude;
       this.detailLng = this.business.longitude;
+      
       this.detaildescription = this.business.description
       this.detailphone = this.business.phone
       this.detailmobile = this.business.mobile
@@ -178,7 +198,8 @@ export class DetailsPage {
       this.detailcreated_at = this.business.created_at
       this.detailupdated_at = this.business.updated_at
 
-      console.log('business', this.business);
+      this.checkedFav(this.business)
+
 
 
       // this.loadMap();

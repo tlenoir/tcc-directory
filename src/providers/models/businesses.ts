@@ -1,6 +1,6 @@
 
 import { Skill } from "./skill";
-export interface RootObject {
+export interface RootObjectBusinesses {
         id: number;
         name: string;
         logo: string;
