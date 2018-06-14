@@ -53,7 +53,7 @@ export class HomePage {
     public navCtrl: NavController) {
 
     platform.ready().then(() => {
-    
+
       this.getData();
       this.getSelectedData();
 
@@ -95,10 +95,10 @@ export class HomePage {
       }
     }
     this.gbp.getBusinessesDataById(this.templateGetBusinesses, this.idToGetSkills)
-      .subscribe( dataBusinesses => {
+      .subscribe(dataBusinesses => {
         this.selected_businessesRoot = dataBusinesses;
       })
-   //if selected_count isworth 0 then 'DONT SHOW LIST_of_businesses_man'
+    //if selected_count isworth 0 then 'DONT SHOW LIST_of_businesses_man'
     this.selected_count = this.selected_skills.length;
   }
 
@@ -132,7 +132,7 @@ export class HomePage {
   }
 
   // favoris button
-  favoris(data, event: Event){
+  favoris(data, event: Event) {
     event.stopPropagation();
     this.isfavoris = !this.isfavoris;
   }
