@@ -1,7 +1,39 @@
+<ion-content>
+  <ion-slides pager>
+    <ion-slide>
+      <div class="diag" >
+        <ion-icon></ion-icon>
+      </div>
+      <div>
+        <img src="/assets/imgs/onboarding1.png">
+        <h1>Bienvenue</h1>
+        <h3>Tahiti Code Camp Drectory</h3>
+        <p>Permet de rechercher des professionnels de l'informatique selon leurs compétences</p>
+      </div>
+    </ion-slide>
 
+    <ion-slide>
+      <div class="diag" >
+        <ion-icon></ion-icon>
+      </div>
+      <div>
+          <img src="/assets/imgs/onboarding2.png">
+        <h2>Profil du professionnels</h2>
+        <p>Accés libre aux fiches techniques et informatives des professionnels</p>
+      </div>
+    </ion-slide>
 
-
-<ion-content >
- 
-
+    <ion-slide>
+      <div class="diag" >
+        <ion-icon></ion-icon>
+      </div>
+      <div>
+          <img src="/assets/imgs/onboarding3.png">
+        <h2>Gélocalisation</h2>
+        <p> Disponibilité d'une MAPS pour localiser facilement un professionnel déterminer le trajet à parcourir</p>
+      </div>
+      <ion-checkbox color="dark" (ionChange)="updateCucumber()" ></ion-checkbox>      
+    </ion-slide>
+  </ion-slides>
+  <button (click)="skip()" id="skip">{{ skipMsg }}</button>  
 </ion-content>

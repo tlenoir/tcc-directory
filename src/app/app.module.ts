@@ -1,3 +1,7 @@
+import { FilterSkillPipe } from './../pipes/filter/filter';
+import { GetBusinessesProvider } from './../providers/get-businesses/get-businesses';
+import { GetSkillsProvider } from './../providers/get-skills/get-skills';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -14,18 +18,26 @@ import { SMS } from '@ionic-native/sms';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { CallNumber } from '@ionic-native/call-number';
 import { Geolocation } from '@ionic-native/geolocation';
-import { GoogleMaps } from '@ionic-native/google-maps'
+import { GoogleMaps } from '@ionic-native/google-maps';
+import { HttpClientModule } from '@angular/common/http';
+import { GetBusinessesIdProvider } from '../providers/get-businesses-id/get-businesses-id';
+import { FilterUniquePipe } from '../pipes/filter-unique/filter-unique';
+
+
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     DetailsPage,
-    WelcomePage
+    WelcomePage,
+    FilterSkillPipe,
+    FilterUniquePipe,
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -43,7 +55,10 @@ import { GoogleMaps } from '@ionic-native/google-maps'
     InAppBrowser,
     Geolocation,
     GoogleMaps,
-    CallNumber
+    CallNumber,
+    GetSkillsProvider,
+    GetBusinessesProvider,
+    GetBusinessesIdProvider
   ]
 })
 export class AppModule {}

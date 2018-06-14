@@ -1,20 +1,106 @@
+<!--
+  Generated template for the HomePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+<!-- 
+  Search Skill 
+        <div>
+      <div class="filter-wrap">
+        <input [(ngModel)]="searchSkill" placeholder="hum?" class="filter-input">
+        <span class="filter-clear" *ngIf="searchSkill.length>0" (click)="clearFilter()">
+          <ion-icon name="close"></ion-icon>
+        </span>
+      </div>
+    </div> 
+   Selected Skills-
+         <div class="selected-skill-wrap">
+      <div class="selected-skill" *ngFor="let s of selected_skills">
+        <span>{{s.name}}
+          <span class="delete-skill" (click)="deleteSkill(s.id)" title="Click to delete">
+            <ion-icon name="close"></ion-icon>
+          </span>
+        </span>
+      </div>
+    </div> 
+  -->
+<ion-menu slide="right" [content]="mycontent">
+  <ion-header>
+    <ion-navbar>
+      <ion-title>Select ton SKILL, bro :</ion-title>
+    </ion-navbar>
+  </ion-header>
+
+
+  <ion-content>
+    <!-- Skill List -->
+    <ul class="skill-list">
+      <ion-item *ngFor="let g of skills | filter : searchSkill" class="skill-item">
+        <label class="container">{{g.name}}
+        <input class="checkbox" checked="checked" (change)="getSelectedData()" type="checkbox" name="skills" value="{{g.id}}" [(ngModel)]="g.selected" />
+        <span class="checkmark"></span>
+      </label>
+
+      </ion-item>
+    </ul>
+
+  </ion-content>
+</ion-menu>
 <ion-header>
   <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
+    <ion-title>Cool Bro'! Faite ton Skill</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
 
 
-  <button ion-button block  (click)="next()"> Next </button>
 
-  <button ion-button block  (click)="mappage()"> map   </button>
+  <ion-list *ngIf="selected_count; else noOeuvres">
+    <ion-item *ngFor="let xyz of selected_businessesRoot | unique: 'name'" (click)="toDetailsPage(xyz.id)">
+      <ion-avatar>
+          <img *ngIf="xyz.logo" src="xyz.logo" />
+          <img *ngIf="!xyz.logo" src="assets/imgs/logo.png" />
+      </ion-avatar>
+      {{xyz.name}}
+      <ion-badge *ngFor="let uvw of xyz.skills">{{uvw.name}}</ion-badge>
+      <button (click)="favoris()" item-end large>
+      <ion-icon [name]="fav ? 'start' : 'star-outline'"></ion-icon>
+    </button>
+    </ion-item>
+  </ion-list>
+
+
+  <!-- Clear Link -->
+  <ion-fab bottom right>
+    <button ion-fab class="clear-selection" title="Clear Selections" (click)="clearSelection()" *ngIf="selected_count">
+      <ion-icon name="trash"></ion-icon>
+    </button>
+  </ion-fab>
+
+  <!--toogleMenu-->
+  <ion-fab bottom right>
+    <button ion-fab class="clear-selection" title="Clear Selections" menuToggle *ngIf="!selected_count">
+      <ion-icon name="funnel"></ion-icon>
+    </button>
+  </ion-fab>
+
+  <ng-template #noOeuvres>
+      
+          <div class="p_desole">
+      
+            <p>Utilisez le fitre de recherche !
+      
+              <ion-icon class="concombre" name="flag" item-left></ion-icon>
+            </p>
+          </div>
+    </ng-template>
+
 
 </ion-content>
+
+
+
+<ion-nav #mycontent></ion-nav>

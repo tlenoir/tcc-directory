@@ -5,45 +5,45 @@
 <ion-content fullscreen="true">
 
   <div class="topMap">
-    <div id="map_canvas" [style.height.px]="mapHeight" [style.width.px]="mapWidth "> </div>
+    <div #map id="map" [style.height.px]="mapHeight" [style.width.px]="mapWidth "> </div>
   </div>
 
 
-<!--   <button ion-button full (click)="next()" class="btnScroll" [style.top.px]="mapHeight">Scroll</button> -->
+  <!--   <button ion-button full (click)="next()" class="btnScroll" [style.top.px]="mapHeight">Scroll</button> -->
 
 
-  <div class="contentDetail" >
-    <div class="Transparentdetail"  [style.height.px]="transparentDetail" (tap)="swipeEvent($event)"></div>
+  <div class="contentDetail">
+    <div class="Transparentdetail" [style.height.px]="transparentDetail"></div>
 
-    <div  [style.height.px]="detailHeight" class="detail">
+    <div [style.height.px]="detailHeight" class="detail">
 
       <ion-row align-items: stretch>
         <button ion-button ion-col grid-columns="3" (click)="Call()" class="BtnCom">
           <ion-icon name="md-call"> </ion-icon>
         </button>
-        <ion-avatar class="avatar" ion-col grid-columns="3" >
-          <img src="assets/imgs/pro.png">
+        <ion-avatar class="avatar" ion-col grid-columns="3">
+          <img src="{{ detailLogo }}">
         </ion-avatar>
-        <button ion-button ion-col grid-columns="3" (click)="Sms()" class="BtnCom">
+        <button ion-button ion-col grid-columns="3" (click)="Sms(detailphone)" class="BtnCom">
           <ion-icon name="md-mail"> </ion-icon>
         </button>
       </ion-row>
 
       <ion-row align-self: center>
-        <h1 ion-col grid-columns="12">Tahiti Code Camp </h1>
+        <h2 ion-col grid-columns="12">{{ detailName }}</h2>
       </ion-row>
 
       <ion-row align-items: center>
         <button ion-fab mini (click)="openWebsite()">
           <ion-icon name="md-globe"></ion-icon>
         </button>
-        <button ion-fab mini (click)="openFacebook()">
+        <button ion-fab mini (click)="openfb()">
           <ion-icon name="logo-facebook"></ion-icon>
         </button>
-        <button ion-fab mini (click)="openTwitter()">
+        <button ion-fab mini (click)="opentwitter()">
           <ion-icon name="logo-twitter"></ion-icon>
         </button>
-        <button ion-fab mini (click)="openLinkInn()">
+        <button ion-fab mini (click)="openlinkInn()">
           <ion-icon name="logo-linkedin"></ion-icon>
         </button>
         <button ion-fab mini>
@@ -52,25 +52,45 @@
       </ion-row>
 
       <ion-segment [(ngModel)]="segment" class="SegmentDetail">
-        <ion-segment-button value="Detail" ion-col grid-columns="6" class="btndetail">
+        <ion-segment-button value="Detail" ion-col grid-columns="3" class="btndetail">
           Detail
         </ion-segment-button>
-        <ion-segment-button value="Competences" ion-col grid-columns="6" class="btncompetences">
+        <ion-segment-button value="Description" ion-col grid-columns="3" class="btndescription">
+          Description
+        </ion-segment-button>
+        <ion-segment-button value="Competences" ion-col grid-columns="3" class="btncompetences">
           Competences
         </ion-segment-button>
       </ion-segment>
 
       <div [ngSwitch]="segment">
         <ion-list *ngSwitchCase="'Detail'">
+          <ion-item class="switch" [style.height.px]="detaildetailHeight" >
+            <ion-icon name="mail"> <b>Email: </b>{{ detailEmail }} </ion-icon>
+            <br>
+            <ion-icon name="phone-portrait"> <b>Mobile:</b>  {{ detailphone }} </ion-icon>
+            <br>
+            <ion-icon name="call"> <b>Téléphone:</b> {{ detailmobile }} </ion-icon>
+            <br>
+            <ion-icon name="time"> <b>Horaire: </b> <pre>
+Lundi: {{detailmonday_start}}  à  {{ detailmonday_end}}
+Mardi: {{detailtuesday_start }} à {{detailtuesday_end}}
+Mercredi: {{detailwednesday_start}} à {{detailwednesday_end}}
+Jeudi: {{detailthursday_start}} à {{detailthursday_end}}
+Vendredi:  {{ detailfriday_start}} à {{detailfriday_end}}
+Samedi:  {{ detailsaturday_start}} à {{detailsaturday_end}}
+Dimanche: {{detailsunday_start}} à {{detailsunday_end}}
+</pre>
+                                                          
+            
+            </ion-icon>
+            <br>
+          </ion-item>
+        </ion-list>
+
+        <ion-list *ngSwitchCase="'Description'">
           <ion-item class="switch">
-            <ion-icon name="mail"> Email:</ion-icon>
-            <br>
-            <ion-icon name="phone-portrait"> Mobile: </ion-icon>
-            <br>
-            <ion-icon name="call"> Téléphone:</ion-icon>
-            <br>
-            <ion-icon name="time"> Horaire d'ouverture: </ion-icon>
-            <br>
+            <p class="detaildescription" ion-col grid-columns="5" >{{ detaildescription }}  </p>
           </ion-item>
         </ion-list>
 
