@@ -15,11 +15,12 @@
 
 
   <ion-content>
-    <ion-buttons>
-      <button (click)="goToFavoritePage()" >
-        favoris
-      </button>
-    </ion-buttons>
+    <ion-item class="favButton" (click)="goToFavoritePage()">
+        
+          Favoris
+          <ion-icon name="star"></ion-icon>
+        
+    </ion-item>
     <!-- Skill List -->
     <ul class="skill-list">
       <ion-item *ngFor="let g of skills | filter : searchSkill" class="skill-item">
@@ -53,9 +54,6 @@
       </ion-avatar>
       <h3>{{xyz.name}}</h3>
       <ion-badge *ngFor="let uvw of xyz.skills">{{uvw.name}}</ion-badge>
-      <button (click)="favoris(xyz, $event)" item-end large>
-        <ion-icon class="fav_icon" [name]=" isfavoris ? 'star' : 'star-outline'"></ion-icon>
-      </button>
     </ion-item>
   </ion-list>
 

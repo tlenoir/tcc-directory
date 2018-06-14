@@ -39,7 +39,7 @@ export class FavoritePage {
   }
 
   goToDetail(id: RootObjectBusinessById) {
-    this.navCtrl.push(DetailsPage, id.id);
+    this.navCtrl.push(DetailsPage, {idal:id.id});
   }
 
 }
