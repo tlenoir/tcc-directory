@@ -1,10 +1,17 @@
 page-home {
 
+  .list-show{
+    font-size: 1.8em;
+  }
+
+  .badge-marge{
+    margin-left: 2px;
+  }
+
   .favButton{
     font-size: 1.7em;
     align-items: center;
     justify-content: center;
-    background-color: goldenrod;
   }
 
   .fav_icon{
@@ -53,18 +60,18 @@ page-home {
     position: absolute;
     top: 0;
     left: 0;
-    height: 25px;
-    width: 25px;
+    height: 20px;
+    width: 20px;
     background-color: #eee;
   }
   
   /* On mouse-over, add a grey background color */
 
-  .skill-item:hover{
+  // .skill-item:after{
 
-    background-color: blueviolet;
+  //   background-color: blueviolet;
 
-  }
+  // }
   .container:hover input ~ .checkmark {
     background-color: rgba(222, 218, 226, 0.836);
   }

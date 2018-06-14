@@ -7,23 +7,23 @@
 
 <!-- Start with an side-menu right-->
 <ion-menu slide="right" [content]="mycontent">
-  <ion-header>
+  <ion-header color="secondary">
     <ion-navbar>
-      <ion-title>Select ton SKILL, bro :</ion-title>
+      <ion-title>Compétences</ion-title>
     </ion-navbar>
   </ion-header>
 
 
   <ion-content>
-    <ion-item class="favButton" (click)="goToFavoritePage()">
-        
-          Favoris
-          <ion-icon name="star"></ion-icon>
-        
+    <ion-item class="favButton" (click)="goToFavoritePage()" color="danger">
+
+      Favoris
+      <ion-icon name="star"></ion-icon>
+
     </ion-item>
     <!-- Skill List -->
     <ul class="skill-list">
-      <ion-item *ngFor="let g of skills | filter : searchSkill" class="skill-item">
+      <ion-item *ngFor="let g of skills | filter : searchSkill" class="skill-item" [color]="g.selected ? 'light': 'danger'">
         <label class="container">{{g.name}}
           <input class="checkbox" checked="checked" (change)="getSelectedData()" type="checkbox" name="skills" value="{{g.id}}" [(ngModel)]="g.selected"
           />
@@ -37,9 +37,14 @@
 </ion-menu>
 
 <!-- menu end  ==== Welcome to the content List of BusinessesMan-->
-<ion-header>
+<ion-header color="primary">
   <ion-navbar>
-    <ion-title>Cool Bro'! Faite ton Skill</ion-title>
+    <ion-nav-buttons>
+      <button menuToggle>
+        <ion-icon name="ios-funnel"></ion-icon>
+      </button>
+    </ion-nav-buttons>
+    <ion-title>Liste des compétences</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -48,12 +53,12 @@
 
 
   <ion-list *ngIf="selected_count; else noOeuvres">
-    <ion-item *ngFor="let xyz of selected_businessesRoot | unique: 'name'" (click)="toDetailsPage(xyz.id)">
+    <ion-item class="list-show" *ngFor="let xyz of selected_businessesRoot | unique: 'name'" (click)="toDetailsPage(xyz.id)">
       <ion-avatar item-start>
         <img [src]="xyz.logo" />
       </ion-avatar>
       <h3>{{xyz.name}}</h3>
-      <ion-badge *ngFor="let uvw of xyz.skills">{{uvw.name}}</ion-badge>
+      <ion-badge class="badge-marge" *ngFor="let uvw of xyz.skills">{{uvw.name}}</ion-badge>
     </ion-item>
   </ion-list>
 
@@ -79,7 +84,7 @@
 
     <div class="p_desole">
 
-      <p>Utilisez le fitre de recherche
+      <p>Aucune compétence n'a été sélectionné
 
         <ion-icon class="flag" name="flag" item-left></ion-icon>
       </p>
