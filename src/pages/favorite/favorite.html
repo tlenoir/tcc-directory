@@ -34,7 +34,7 @@
     <ion-item *ngFor="let abc of favoriteData" (click)="goToDetail(abc)">
       <img [src]="abc.logo" />
       <div>
-        <ion-badge color="secondary">{{adb.id}}</ion-badge>
+        <ion-badge color="secondary">{{abc.id}}</ion-badge>
         <ion-icon name="star"></ion-icon>
       </div>
       <h4>{{abc.name}}</h4>
